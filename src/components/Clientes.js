@@ -4,12 +4,11 @@ import Cliente from './Cliente'
 class Clientes extends Component{
     render() {
         const { clientes } = this.props
-
         return (
             <div>
-                {clientes.map(cliente =>
+                {clientes.map((cliente) =>
                     <Cliente 
-                        key={cliente.name}
+                        key={cliente.objectId}
                         cliente={cliente}
                     />
                 )}

@@ -11,7 +11,7 @@ class Foto extends Component {
         const { cliente } = this.props
         return(
             <div style={styles.foto}>
-                <img alt={cliente.name} src={cliente.img} width="100" height="100" />
+                <img src={'/clientes/aa.jpg'} width="100" height="100" />
             </div>
         )
     }

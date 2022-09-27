@@ -4,30 +4,23 @@ import Home from './components/Home';
 import Layout from './components/Layout';
 import NavBar from './components/NavBar';
 import Title from './components/Title';
+import axios from 'axios';
 
 
 
 class App extends Component {
   state = {
-    clientes: [
-      { name: 'Juan Jimenez', plan: 'Maximun Spiderman', img: '/clientes/jj.jpg' },
-      { name: 'Mario Mendez', plan: 'Combo Superman', img: '/clientes/mm.jpg' },
-      { name: 'Angela Aguilar', plan: 'Pollo KFC', img: '/clientes/aa.jpg' },
-    ],
+    clientes: [],
     login: false,
   }
 
-  async componentDidMount() {
-    const response = await fetch('/cliente/index', {
-      method: "GET",
-      mode: 'cors',
-      headers:{
-        "Content-Type": "application/json",
-      }, 
-    });
-    console.log(response);
+  componentDidMount() {
+    axios.get(`/cliente`)
+    .then(res => {
+      const clientes = res.data;
+      this.setState({ clientes });
+    })  
   }
-  
 
   render() {
     return (

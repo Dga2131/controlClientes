@@ -1,9 +1,11 @@
-import { Component } from "react";
+import { Component, alert } from "react";
 import Foto from './Foto'
 import Button from "./Button";
 import Modal from "./Modal";
 import Verinfo from "./VerInfo";
-import Formaddclient from "./Formaddclient";
+import axios from 'axios';
+import Verhistoria from "./Verhistoria";
+
 
 const styles = {
     cliente: {
@@ -42,6 +44,20 @@ class Cliente extends Component {
         esModalVisible3: false,
     }
 
+    createTwoButtonAlert = () =>
+        alert.alert(
+        "Alert Title",
+        "My Alert Msg",
+        [
+            {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+    );
+
     mostrarModal = () => {
         this.setState({ esModalVisible: !this.state.esModalVisible })
     }
@@ -54,27 +70,44 @@ class Cliente extends Component {
         this.setState({ esModalVisible3: !this.state.esModalVisible3 })
     }
 
+    eliminar = () => {
+        const { cliente } = this.props
+        const id = cliente.objectId
+        console.log(id)
+        axios.delete(`/cliente/${ id }`)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if(res.status == 200){
+                console.log('El cliente fue eliminado exitosamente')
+            } else {
+                console.log(res.message)
+            }
+        })
+        
+    }
+
     render() {
         const { cliente } = this.props
         const { esModalVisible, esModalVisible2, esModalVisible3 } = this.state   
+
         return (
             <div style={styles.cliente}>
                 <ul style={styles.ul}>
                     <li style={styles.client}>
-                        <Foto cliente = {cliente} />
-                        <p>Nombre: <b>{cliente.name}</b></p>
-                        <p>Plan: <b>{cliente.plan}</b></p> 
+                        <Foto />
+                        <p>Nombre: <b>{cliente.nombre} {cliente.apellidoPaterno} {cliente.apellidoMaterno}</b></p>
+                        <p>Plan: <b>{cliente.paquete.tipo}</b></p> 
                         <Button onClick={() => this.mostrarModal()}>
                             Ver Info           
                         </Button>
                         <Modal 
                             esModalVisible={esModalVisible} 
                             mostrarModal={this.mostrarModal}
-                            foto={<Foto cliente = {cliente} />} 
-                            titulo={cliente.name} 
+                            foto={<Foto/>} 
+                            titulo={cliente.nombre+' '+cliente.apellidoPaterno+' '+cliente.apellidoMaterno}
                             estadoOverlay = {true}
                             >
-
                             <Verinfo cliente = {cliente}/>
                         </Modal>
                         <Button onClick={() => this.mostrarModal2()}>
@@ -83,10 +116,10 @@ class Cliente extends Component {
                         <Modal 
                             esModalVisible={esModalVisible2} 
                             mostrarModal={this.mostrarModal2} 
-                            titulo={'Historial de: '+cliente.name} 
+                            titulo={'Historial de pago: '+cliente.nombre+' '+cliente.apellidoPaterno+' '+cliente.apellidoMaterno} 
                             estadoOverlay = {true}
                             >
-                            <Formaddclient />
+                            <Verhistoria cliente = {cliente}/>
                         </Modal>
                         <Button onClick={() => this.mostrarModal3()}>
                             Eliminar
@@ -97,7 +130,10 @@ class Cliente extends Component {
                             titulo={'¡Advertencia!'}
                             >
                             <p style={styles.p}>¿Estás seguro de eliminar al cliente? </p>
-                            <p style={styles.p}>{cliente.name} </p>
+                            <p style={styles.p}>{cliente.nombre} {cliente.apellidoPaterno} {cliente.apellidoMaterno}</p>
+                            <Button onClick={() => {this.eliminar(); this.mostrarModal3()}}  >
+                                Eliminar
+                            </Button>
                         </Modal>
                     </li>
                 </ul>
