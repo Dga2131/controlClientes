@@ -129,7 +129,7 @@ class Formaddclient extends Component{
                     <Button onClick={() => this.handleSubmit}>
                             Agregar Cliente
                     </Button >
-                    <input type="reset" value="Limpiar Formulario" /> 
+                    
                 </form>
             </div>
         )

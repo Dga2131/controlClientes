@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react';
 import Clientes from './components/Clientes'
 import Home from './components/Home';

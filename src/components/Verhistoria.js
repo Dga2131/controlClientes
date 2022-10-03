@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Pagos from "./Pagos";
+import Button from "./Button";
 import axios from "axios"
 
 class Verhistoria extends Component{
@@ -20,12 +21,26 @@ class Verhistoria extends Component{
         
     }
 
+    agregarPAgo = () => {
+        const { cliente } = this.props
+        const id = cliente.objectId
+        axios.post(`/cliente/pago/${ id }`)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            this.componentDidMount();
+        })
+    }
+
     render() {
         return (
             <div>
                 <Pagos 
                     pagos = {this.state.pagos}
                 />
+                <Button onClick={() => {this.agregarPAgo()}}>
+                    Agregar pago
+                </Button >
             </div>
         )
     }
