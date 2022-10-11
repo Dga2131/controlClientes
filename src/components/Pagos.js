@@ -3,13 +3,14 @@ import Pago from './Pago'
 
 class Pagos extends Component{
     render() {
-        const { pagos } = this.props
+        const { pagos, mostrarpago } = this.props
         return (
             <div>
                 {pagos.map((pago) =>
                     <Pago 
                         key={pago.objectId}
                         pago={pago}
+                        mostrarpago={mostrarpago}
                     />
                 )}
             </div>

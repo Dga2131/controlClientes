@@ -18,12 +18,14 @@ const styles = {
     container:{
         width: '900px',
         minHeight: '100px',
+        maxHeight: '600px',
         background: '#fff',
         position: 'relative',
         bordeRadius: '5px',
         boxShadow: 'rgba(100,100,111, 0.2) 0px 7px 29px 0px',
         padding: '20px',
         color: '#1C236D',
+        overflow: 'scroll',
     },
     headersmodal:{
         display: 'flex',

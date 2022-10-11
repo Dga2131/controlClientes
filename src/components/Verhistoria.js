@@ -37,6 +37,7 @@ class Verhistoria extends Component{
             <div>
                 <Pagos 
                     pagos = {this.state.pagos}
+                    mostrarpago={this.componentDidMount()}
                 />
                 <Button onClick={() => {this.agregarPAgo()}}>
                     Agregar pago

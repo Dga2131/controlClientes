@@ -29,9 +29,12 @@ class App extends Component {
         <NavBar />
         <Layout>
           <Home />
-          <Title />
+          <Title
+             mostarCliente ={this.componentDidMount()}
+          />
           <Clientes 
             clientes={this.state.clientes} 
+            mostarCliente ={this.componentDidMount()}
           />
         </Layout>
       </div>

@@ -56,6 +56,7 @@ class Formaddclient extends Component{
             },
         })
         .then(res => {
+            const {mostrarCliente} = this.props
             console.log(res);
             console.log(res.data);
         })

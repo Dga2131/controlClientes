@@ -24,11 +24,11 @@ class Title extends Component{
     }
 
     render(){
-        const { esModalVisible } = this.state 
+        const { esModalVisible, mostrarCliente } = this.state 
         return(
             <div style={styles.title}>
                 <h1>Clientes</h1>
-                <Button onClick={() => this.mostrarModal()}>
+                <Button onClick={() => this.mostrarModal()} >
                     Agregar Cliente
                 </Button>
                 <Modal 
@@ -36,7 +36,9 @@ class Title extends Component{
                     mostrarModal={this.mostrarModal}
                     estadoOverlay = {true}
                     titulo={'Agregar Cliente'}>
-                    <Formaddclient />
+                    <Formaddclient 
+                        mostrarCliente={mostrarCliente}
+                    />
                 </Modal>
             </div>
         )

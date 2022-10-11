@@ -1,4 +1,4 @@
-import { Component, alert } from "react";
+import { Component, react } from "react";
 import Foto from './Foto'
 import Button from "./Button";
 import Modal from "./Modal";
@@ -44,19 +44,7 @@ class Cliente extends Component {
         esModalVisible3: false,
     }
 
-    createTwoButtonAlert = () =>
-        alert.alert(
-        "Alert Title",
-        "My Alert Msg",
-        [
-            {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-    );
+    
 
     mostrarModal = () => {
         this.setState({ esModalVisible: !this.state.esModalVisible })
@@ -70,8 +58,9 @@ class Cliente extends Component {
         this.setState({ esModalVisible3: !this.state.esModalVisible3 })
     }
 
+
     eliminar = () => {
-        const { cliente } = this.props
+        const { cliente, mostrarCliente } = this.props
         const id = cliente.objectId
         console.log(id)
         axios.delete(`/cliente/${ id }`)
@@ -131,7 +120,7 @@ class Cliente extends Component {
                             >
                             <p style={styles.p}>¿Estás seguro de eliminar al cliente? </p>
                             <p style={styles.p}>{cliente.nombre} {cliente.apellidoPaterno} {cliente.apellidoMaterno}</p>
-                            <Button onClick={() => {this.eliminar(); this.mostrarModal3()}}  >
+                            <Button onClick={() => {this.eliminar(); this.mostrarModal3()}  }  >
                                 Eliminar
                             </Button>
                         </Modal>

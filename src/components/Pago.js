@@ -4,6 +4,7 @@ import moment from "moment/moment";
 import 'moment/locale/es';
 import axios from 'axios';
 import Modal from "./Modal";
+import { Prev } from "react-bootstrap/esm/PageItem";
 
 
 const styles = {
@@ -42,7 +43,7 @@ class Pago extends Component {
     }
 
     eliminar = () => {
-        const { pago } = this.props
+        const { pago, mostrarpago } = this.props
         const id = pago.objectId
         console.log(id)
         axios.delete(`/cliente/pago/${ id }`)
@@ -55,6 +56,7 @@ class Pago extends Component {
                 console.log(res.message)
             }
         })
+
         
     }
 
@@ -71,7 +73,7 @@ class Pago extends Component {
                         <Button onClick={() => this.mostrarModal()}>
                             Imprimir
                         </Button>
-                        <Button onClick={()=> {this.eliminar(); this.mostrarModal()}}>
+                        <Button onClick={()=> {this.eliminar()}}>
                             Eliminar pago
                         </Button>
                     </li>
